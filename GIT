@@ -1,0 +1,20 @@
+// create a remote git repository
+git remote add origin git@github.com:th3hamburgler/GoodForm.git
+
+// add file to local git repository
+git add application/libraries/goodform.php
+git add application/datamapper/goodform.php
+git add application/config/goodform.php
+git add www/css/goodform.css
+git add user_guide/*
+git add VERSION
+
+
+// commit files added to local repository
+git commit -m 'change message'
+
+// push all 'commit' files to remote repository
+git push origin master
+
+
+// git status

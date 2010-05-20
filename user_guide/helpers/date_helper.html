@@ -56,7 +56,7 @@ Date Helper
 <div id="content">
 
 
-<h1>Date Helper</h1>
+<h1>Date Helper (Extended)</h1>
 
 <p>The Date Helper file contains functions that help you work with dates.</p>
 
@@ -68,6 +68,170 @@ Date Helper
 
 
 <p>The following functions are available:</p>
+
+<p><small><span class="as">purple</span> denotes function is an extended function not present in original CI Framework.</small></p>
+
+
+
+<h2 class="as">mysqldatetime_to_mysqldate()</h2>
+
+<p>Converts a MYSQL datetime string into a MYSQL date string</p>
+
+<code>$datestring = "2010-01-24 13:03:59";<br />
+<br />
+echo mysqldatetime_to_mysqldate($datestring);</code>
+
+
+
+<h2 class="as">sum_mysqldate()</h2>
+
+<p>Increase a MySQL date by days/months/years</p>
+
+<p>The first parameter must contain the date in mysql datetime format.</p>
+<p>The second parameter must contain either 'day', 'month' or 'year'.</p>
+<p>Finally the third parameter must contain an interger value to which to increase the date by.</p>
+
+<code>$datestring = "2010-01-24 13:03:59";<br />
+<br />
+// add a day to the date
+<br />
+echo sum_mysqldate($datestring, 'day', 1);
+<br />
+<br />
+// add three months to the date
+<br />
+echo sum_mysqldate($datestring, 'month', 3);
+<br />
+<br />
+// add seven years to the date
+<br />
+echo sum_mysqldate($datestring, 'year', 7);</code>
+
+
+
+<h2 class="as">subtract_mysqldate()</h2>
+
+<p>Decrease a MySQL date by days/months/years</p>
+
+<p>The first parameter must contain the date in mysql datetime format.</p>
+<p>The second parameter must contain either 'day', 'month' or 'year'.</p>
+<p>Finally the third parameter must contain an interger value to which to increase the date by.</p>
+
+<code>$datestring = "2010-01-24 13:03:59";<br />
+<br />
+// subtract two days from the date
+<br />
+echo subtract_mysqldate($datestring, 'day', 2);
+<br />
+<br />
+// subtract one month from the date
+<br />
+echo subtract_mysqldate($datestring, 'month', 1);
+<br />
+<br />
+// subtract six years from the date
+<br />
+echo subtract_mysqldate($datestring, 'year', 6);</code>
+
+
+
+<h2 class="as">mysqldatetime_to_timestamp()</h2>
+
+<p>Convert MySQL's DATE (YYYY-MM-DD) or DATETIME (YYYY-MM-DD hh:mm:ss) to a unix timestamp</p>
+
+<p>Takes one parameter, must be a valid mysqldate or mysqldatetime string.</p>
+
+<code>$datestring = "2010-01-24 13:03:59";<br />
+<br />
+// convert mysqldatetime to unix timestamp
+<br />
+echo mysqldatetime_to_timestamp($datestring);</code>
+
+
+
+<h2 class="as">mysqldatetime_to_date()</h2>
+
+<p>Convert MySQL's DATE (YYYY-MM-DD) or DATETIME (YYYY-MM-DD hh:mm:ss) to date using given format string</p>
+
+<p>The first parameter must be a valid mysqldate or mysqldatetime string.</p>
+<p>The second parameter contains the <a href="http://php.net/manual/en/function.date.php">php date format</a> to return The default format is <var>'d.m.Y, H:i:s'</var>.</p>
+
+<code>$datestring = "2010-01-24 13:03:59";<br />
+<br />
+// convert mysqldatetime to date string
+<br />
+echo mysqldatetime_to_date($datestring, 'd/m/Y');</code>
+
+
+
+<h2 class="as">timestamp_to_mysqldatetime()</h2>
+
+<p>Convert a unix timestamp to MySQL's DATE or DATETIME (YYYY-MM-DD hh:mm:ss)</p>
+
+<p>The first parameter must be a valid unix timestamp.</p>
+<p>The second parameter is a boolean flag:
+	<ul>
+		<li><var>TRUE</var>  to return a mysqldatetime string.</li>
+		<li><var>FALSE</var> to  to return a mysqldate string.</li>
+	</ul>
+The default format is <var>mysqldatetime</var>.</p>
+
+<code>$timestamp = "979844699";<br />
+<br />
+// convert unix timestamp to mysqldate
+<br />
+echo timestamp_to_mysqldatetime($timestamp, FALSE);</code>
+
+
+
+<h2 class="as">timestamp_to_date()</h2>
+
+<p>Convert timestamp to human date</p>
+
+<p>The first parameter must be a valid unix timestamp.</p>
+<p>The second parameter contains the <a href="http://php.net/manual/en/function.date.php">php date format</a> to return The default format is <var>'d.m.Y, H:i:s'</var>.</p>
+
+<code>$timestamp = "979844699";<br />
+<br />
+// convert unix timestamp to date
+<br />
+echo timestamp_to_date($timestamp, 'd/m/Y');</code>
+
+
+
+<h2 class="as">date_to_timestamp()</h2>
+
+<p>Convert human date to Timestamp</p>
+
+<p>Takes one parameter, a date string e.g. <var>"27/03/2010"</var> or <var>"12-05-2009"</var>, and returns the unix timestamp</p>
+
+<code>$date = "27/03/2010";<br />
+<br />
+// convert date to unix timestamp
+<br />
+echo date_to_timestamp($date);</code>
+
+
+
+<h2 class="as">date_to_mysqldatetime()</h2>
+
+<p>Convert human date to MySQL's DATE or DATETIME (YYYY-MM-DD hh:mm:ss)</p>
+
+<p>The first parameter must be a date string e.g. <var>"27/03/2010"</var> or <var>"12-05-2009"</var>.</p>
+<p>The second parameter is a boolean flag:
+	<ul>
+		<li><var>TRUE</var>  to return a mysqldatetime string.</li>
+		<li><var>FALSE</var> to  to return a mysqldate string.</li>
+	</ul>
+The default format is <var>mysqldatetime</var>.</p>
+
+<code>$date = "27/03/2010";<br />
+<br />
+// convert date to mysqldatetime
+<br />
+echo date_to_mysqldatetime($date, TRUE);</code>
+
+
 
 <h2>now()</h2>
 

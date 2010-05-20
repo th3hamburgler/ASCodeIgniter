@@ -10,5 +10,8 @@ git commit -m 'change message'
 // push all 'commit' files to remote repository
 git push origin master
 
+// remove file from repo
+git rm path/to/file.ext
+
 // query git current status
 git status

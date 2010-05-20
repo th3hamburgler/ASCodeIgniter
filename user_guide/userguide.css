@@ -404,3 +404,8 @@ form {
  margin: 0;
  padding: 1px 5px 2px 5px;
 }
+
+/* style to indicate extended functionality */
+.as {
+	color: rgb(102, 0, 204) !important;
+}

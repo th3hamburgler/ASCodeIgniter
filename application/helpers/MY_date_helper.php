@@ -50,7 +50,7 @@ function mysqldatetime_to_mysqldate($date)
  * @access	public
  * @return	string
  */
-function sum_date($date, $what=FALSE, $value, $return_format='mysql') {
+function sum_mysqldate($date, $what=FALSE, $value, $return_format='mysql') {
 	
 	list($year, $month, $day) = split("-", $date);
 	      
@@ -81,7 +81,7 @@ function sum_date($date, $what=FALSE, $value, $return_format='mysql') {
  * @access	public
  * @return	string
  */
-function subtract_date($date, $what=FALSE, $value, $return_format='mysql') {
+function subtract_mysqldate($date, $what=FALSE, $value, $return_format='mysql') {
 	
 	list($year, $month, $day) = split("-", $date);
 	   

@@ -1,1 +1,1 @@
-<? header('Location: '.$_SERVER["REQUEST_URI"].'htdocs/'); // quick dirty redirect for local server testing ?>
+<? header('Location: '.$_SERVER["REQUEST_URI"].'www/'); // quick dirty redirect for local server testing ?>

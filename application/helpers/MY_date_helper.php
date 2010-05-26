@@ -23,9 +23,66 @@
  * @category	Helpers
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/helpers/date_helper.html
+ * @version		1.1
+ *
+ * Changes
+ * -------
+ * 1.1			- Added mysqldatetime_to_vector function (26/05/10)
+ * 1.0			- First Release
  */
 
 // ------------------------------------------------------------------------
+
+/**
+ * Convert MySQL's DATETIME (YYYY-MM-DD hh:mm:ss) to a vector
+ *
+ * Returns a human readable time vector defining the distance between to
+ * time points
+ *
+ * @author 	Jim Wardlaw
+ * @access	public
+ * @return	string
+ */
+function mysqldatetime_to_vector($start, $end=NULL)
+{
+	if(!$end)
+		// if end is null default to today
+		$end = timestamp_to_mysqldatetime();
+	
+	// convert dates to time stamps
+	$diff = mysqldatetime_to_timestamp($start) - mysqldatetime_to_timestamp($end);
+	
+	// is distance less than a day
+	if(abs($diff) < (24 * 60 * 60))
+	{
+		// return hours
+		return round(($diff/(60 * 60))).' hours';
+	}
+	// is distance less than 2 weeks
+	else if(abs($diff) < (14 * 24 * 60 * 60))
+	{
+		// return days
+		return round(($diff/(24 * 60 * 60))).' days';
+	}
+	// is distance less than 2 months (60 days)
+	else if(abs($diff) < (63 * 24 * 60 * 60))
+	{
+		// return weeks
+		return round(($diff/(7 * 24 * 60 * 60))).' weeks';
+	}
+	// is distance less than 2 years
+	else if(abs($diff) < (730 * 24 * 60 * 60))
+	{
+		// return months
+		return round(($diff/(30 * 24 * 60 * 60))).' months';
+	}
+	// is return distance in years
+	else
+	{
+		// return days
+		return round(($diff/(365 * 24 * 60 * 60))).' years';
+	}
+}
 
 /**
  * Convert MySQL's DATETIME (YYYY-MM-DD hh:mm:ss) to a MySQL's DATE (YYYY-MM-DD)
@@ -50,7 +107,7 @@ function mysqldatetime_to_mysqldate($date)
  * @access	public
  * @return	string
  */
-function sum_mysqldate($date, $what=FALSE, $value, $return_format='mysql') {
+function sum_date($date, $what=FALSE, $value, $return_format='mysql') {
 	
 	list($year, $month, $day) = split("-", $date);
 	      
@@ -81,7 +138,7 @@ function sum_mysqldate($date, $what=FALSE, $value, $return_format='mysql') {
  * @access	public
  * @return	string
  */
-function subtract_mysqldate($date, $what=FALSE, $value, $return_format='mysql') {
+function subtract_date($date, $what=FALSE, $value, $return_format='mysql') {
 	
 	list($year, $month, $day) = split("-", $date);
 	   
@@ -108,10 +165,10 @@ function subtract_mysqldate($date, $what=FALSE, $value, $return_format='mysql') 
  *
  * Returns the timestamp equivalent of a given DATE/DATETIME
  *
- * @todo add regex to validate given datetime
- * @author Clemens Kofler <clemens.kofler@chello.at>
- * @access    public
- * @return    integer
+ * @todo 	add regex to validate given datetime
+ * @author	Clemens Kofler <clemens.kofler@chello.at>
+ * @access	public
+ * @return	integer
  */
 function mysqldatetime_to_timestamp($datetime = "")
 {
@@ -143,9 +200,9 @@ function mysqldatetime_to_timestamp($datetime = "")
  *
  * Returns the date (format according to given string) of a given DATE/DATETIME
  *
- * @author Clemens Kofler <clemens.kofler@chello.at>
- * @access    public
- * @return    integer
+ * @author	Clemens Kofler <clemens.kofler@chello.at>
+ * @access	public
+ * @return	integer
  */
 function mysqldatetime_to_date($datetime = "", $format = "d.m.Y, H:i:s")
 {
@@ -159,9 +216,9 @@ function mysqldatetime_to_date($datetime = "", $format = "d.m.Y, H:i:s")
  *
  * Returns the DATE or DATETIME equivalent of a given timestamp
  *
- * @author Clemens Kofler <clemens.kofler@chello.at>
- * @access    public
- * @return    string
+ * @author	Clemens Kofler <clemens.kofler@chello.at>
+ * @access	public
+ * @return	string
  */
 function timestamp_to_mysqldatetime($timestamp = "", $datetime = true)
 {
@@ -175,11 +232,11 @@ function timestamp_to_mysqldatetime($timestamp = "", $datetime = true)
  *
  * Returns the date (format according to given string) of a given timestamp
  *
- * @author    Cleiton Francisco V. Gomes <http://www.cleitonfco.com.br/>
- * @access    public
- * @param     string
- * @param     string
- * @return    string
+ * @author	Cleiton Francisco V. Gomes <http://www.cleitonfco.com.br/>
+ * @access	public
+ * @param	string
+ * @param	string
+ * @return	string
  */
 function timestamp_to_date($timestamp = "", $format = "d/m/Y H:i:s")
 {
@@ -192,10 +249,10 @@ function timestamp_to_date($timestamp = "", $format = "d/m/Y H:i:s")
  *
  * Returns the timestamp equivalent of a given HUMAN DATE/DATETIME
  *
- * @author    Cleiton Francisco V. Gomes <http://www.cleitonfco.com.br/>
- * @access    public
- * @param     string
- * @return    integer
+ * @author	Cleiton Francisco V. Gomes <http://www.cleitonfco.com.br/>
+ * @access	public
+ * @param	string
+ * @return	integer
  */
 function date_to_timestamp($datetime = "")
 {
@@ -217,11 +274,11 @@ function date_to_timestamp($datetime = "")
  *
  * Returns the DATE or DATETIME equivalent of a given HUMAN DATE/DATETIME
  *
- * @author    Cleiton Francisco V. Gomes <http://www.cleitonfco.com.br/>
- * @access    public
- * @param     string
- * @param     boolean
- * @return    string
+ * @author	Cleiton Francisco V. Gomes <http://www.cleitonfco.com.br/>
+ * @access	public
+ * @param	string
+ * @param	boolean
+ * @return	string
  */
 function date_to_mysqldatetime($date = "", $datetime = TRUE)
 {

@@ -61,6 +61,9 @@ HTML Helper
 <p>The HTML Helper file contains functions that assist in working with HTML.</p>
 
 <ul>
+	<li><a class="as" href="#div">div()</a></li>
+	<li><a class="as" href="#clear">clear()</a></li>
+	<li><a class="as" href="#dlist">dlist()</a></li>
 	<li><a href="#br">br()</a></li>
 	<li><a href="#heading">heading()</a></li>
 	<li><a href="#img">img()</a></li>
@@ -77,6 +80,55 @@ HTML Helper
 <code>$this->load->helper('html');</code>
 
 <p>The following functions are available:</p>
+
+<p><small><span class="as">purple</span> denotes function is an extended function not present in original CI Framework.</small></p>
+
+
+
+<h2 class="as"><a name="div"></a>div()</h2>
+<p>Generates a div element with the contents you submit. Example:</p>
+<code>echo div('This is my div');</code>
+<p>The above would produce: &lt;div&gt;This is my div&lt;/div&gt;</p>
+<p>An attribute array can also be passed in via the second parameter. Example:</p>
+<pre>$attr = array(
+	'id' => 'div-id',
+	'class' => 'div-class'
+);
+
+echo div('This is my special div', $attr);</pre>
+<p>The above would produce: &lt;div id="div-id" class="div-class" &gt;This is my special div&lt;/div&gt;</p>
+
+<h2 class="as"><a name="clear"></a>clear()</h2>
+<p>Generates a clearing div element, this function takes no arguments. Example:</p>
+<code>echo clear();</code>
+<p>The above would produce: &lt;div class="clear"&gt;&lt;/div&gt;</p>
+
+<h2 class="as"><a name="dlist"></a>dlist()</h2>
+<p>Generates a definition list. First argument is the lists item array. The array key contains the items title and the value is the definition. To include multiple definitions for one title you can set the value equal to and array. Example:</p>
+<pre>$items = array(
+	'title 1' => 'def 1',
+	'title 2' => 'def 2',
+	'title 3' => array(
+		'def 3.a',
+		'def 3.d',
+		'def 3.c'
+	)
+);
+
+echo dlist($items);</pre>
+<p>The above would produce:</p>
+<pre>&lt;dl&gt;
+	&lt;dt&gt;title 1&lt;/dt&gt;
+	&lt;dd&gt;def 1&lt;/dd&gt;
+	&lt;dt&gt;title 2&lt;/dt&gt;
+	&lt;dd&gt;def 2&lt;/dd&gt;
+	&lt;dt&gt;title 3&lt;/dt&gt;
+	&lt;dd&gt;def 3.a&lt;/dd&gt;
+	&lt;dd&gt;def 3.b&lt;/dd&gt;
+	&lt;dd&gt;def 3.c&lt;/dd&gt;
+&lt;/dl&gt;</pre>
+
+
 
 <h2><a name="br"></a>br()</h2>
 <p>Generates line break tags (&lt;br />) based on the number you submit. Example:</p>
